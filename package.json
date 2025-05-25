@@ -1,0 +1,16 @@
+{
+  "name": "clickthebart-bartastic",
+  "version": "1.0.0",
+  "description": "Click the Bart - Bartastic Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build step needed'"
+  },
+  "keywords": [],
+  "author": "Bart",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
