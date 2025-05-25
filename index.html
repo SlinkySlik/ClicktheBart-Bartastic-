@@ -1,0 +1,217 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click The Bart - Bartastic Game!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <img src="/20250523_213308.png" alt="Click The Bart" class="loading-logo">
+            <div class="loading-text">Loading...</div>
+            <div id="loading-tip" class="loading-tip">Tip: Click Bart to earn points!</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <div class="loading-percentage">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game -->
+    <div id="game-container" class="game-container hidden">
+        <!-- Header -->
+        <header class="game-header">
+            <img src="/20250523_213308.png" alt="Click The Bart" class="game-logo">
+            <div class="points-display">
+                <span class="points-label">Bartastic Points!</span>
+                <span id="points-counter" class="points-counter">0</span>
+            </div>
+        </header>
+
+        <!-- Achievements -->
+        <div class="achievements-section">
+            <h3 class="achievements-title">Achievements</h3>
+            <div id="achievements-container" class="achievements-container">
+                <!-- Achievements will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Game Modes -->
+        <div class="game-modes">
+            <button id="click-mode-btn" class="mode-btn active">Click Mode</button>
+            <button id="tilt-mode-btn" class="mode-btn">Barttilt Mode</button>
+            <button id="catch-mode-btn" class="mode-btn">Catch Real Bart</button>
+            <button id="spinny-mode-btn" class="mode-btn">Spinny Bart</button>
+            <button id="raining-mode-btn" class="mode-btn">Raining Barts</button>
+            <button id="telephone-mode-btn" class="mode-btn">The Telephone</button>
+            <button id="true-bart-mode-btn" class="mode-btn">True or Bart?</button>
+            <button id="upgrade-mode-btn" class="mode-btn">Upgrades</button>
+        </div>
+
+        <!-- Click Mode -->
+        <div id="click-mode" class="game-mode active">
+            <div class="click-area">
+                <img id="bart-image" src="/pngimg.com - simpsons_PNG93.png" alt="Bart Simpson" class="bart-image">
+                <div class="click-instruction">Click Bart for Bartastic Points!</div>
+            </div>
+        </div>
+
+        <!-- Tilt Mode -->
+        <div id="tilt-mode" class="game-mode hidden">
+            <div class="tilt-area">
+                <div class="simpson-eyes">
+                    <div class="eye">
+                        <div class="pupil" id="pupil-left"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="pupil" id="pupil-right"></div>
+                    </div>
+                </div>
+                <div class="tilt-instruction">Tilt your device aggressively for 3 Bartastic Points!</div>
+                <div class="tilt-indicator">
+                    <div class="tilt-meter-label">Tilt Intensity:</div>
+                    <div class="tilt-meter">
+                        <div id="tilt-level" class="tilt-level"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catch Real Bart Mode -->
+        <div id="catch-mode" class="game-mode hidden">
+            <div class="catch-area">
+                <div class="catch-instruction">Find the REAL Bart! Real = +10 points, Fake = -5 points</div>
+                <div class="catch-timer">Time: <span id="catch-timer">30</span>s</div>
+                <button id="start-catch-btn" class="start-catch-btn">Start Barting!</button>
+                <div id="bart-grid" class="bart-grid">
+                    <!-- Bart images will be populated by JavaScript -->
+                </div>
+                <button id="new-round-btn" class="new-round-btn hidden">New Round</button>
+            </div>
+        </div>
+
+        <!-- Spinny Bart Mode -->
+        <div id="spinny-mode" class="game-mode hidden">
+            <div class="spinny-area">
+                <div class="spinny-instruction">Click Bart when the arrow points up! Wrong timing = -3 to -10 points</div>
+                <div class="spinny-container">
+                    <img id="spinny-bart" src="/pngimg.com - simpsons_PNG93.png" alt="Spinning Bart" class="spinny-bart-image">
+                    <div class="timing-indicator"></div>
+                </div>
+                <div class="spinny-timer">Next spin in: <span id="spinny-countdown">3</span>s</div>
+                <button id="start-spinny-btn" class="start-spinny-btn">Start Spinning!</button>
+            </div>
+        </div>
+
+        <!-- Raining Barts Mode -->
+        <div id="raining-mode" class="game-mode hidden">
+            <div class="raining-area">
+                <div class="raining-instruction">Shoot the falling Barts with your Nerf gun!</div>
+                <div class="raining-stats">
+                    <div class="raining-timer">Time: <span id="raining-timer">60</span>s</div>
+                    <div class="barts-eliminated">Eliminated: <span id="barts-eliminated">0</span></div>
+                    <div class="nerf-level">Nerf Level: <span id="nerf-level">1</span></div>
+                </div>
+                <div id="raining-container" class="raining-container">
+                    <div id="crosshair" class="crosshair"></div>
+                </div>
+                <div class="nerf-gun-container">
+                    <img id="nerf-gun" src="/InShot_20250108_192835610.jpg" alt="Nerf Gun" class="nerf-gun">
+                    <button id="switch-gun-btn" class="switch-gun-btn"><></button>
+                </div>
+                <div class="raining-controls">
+                    <button id="start-raining-btn" class="start-raining-btn">Make it Bart Rain!</button>
+                    <button id="explode-raining-btn" class="explode-raining-btn hidden">Explode Raining Bart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Telephone Mode -->
+        <div id="telephone-mode" class="game-mode hidden">
+            <div class="telephone-area">
+                <div class="telephone-instruction">Call Homer Simpson!</div>
+                <div class="telephone-background">
+                    <img src="/Screenshot_20250525_041140_YouTube.jpg" alt="Bart with Phone" class="telephone-bg-image">
+                    <button id="call-homer-btn" class="call-homer-btn">Call Homer</button>
+                </div>
+                <div id="call-status" class="call-status"></div>
+            </div>
+        </div>
+
+        <!-- True or Bart Mode -->
+        <div id="true-bart-mode" class="game-mode hidden">
+            <div class="true-bart-area">
+                <div class="true-bart-instruction">Answer whether Bart's quotes are real or fake! Real quotes from The Simpsons = +5 to +10 points, Fake quotes = -5 to -15 points</div>
+                <div id="true-bart-question" class="true-bart-question">Click "New Question" to start!</div>
+                <div class="true-bart-buttons">
+                    <button id="true-btn" class="true-bart-btn">TRUE</button>
+                    <button id="false-btn" class="true-bart-btn">FALSE</button>
+                </div>
+                <button id="new-question-btn" class="new-question-btn">New Question</button>
+            </div>
+        </div>
+
+        <!-- Upgrade Mode -->
+        <div id="upgrade-mode" class="game-mode hidden">
+            <div class="upgrade-area">
+                <div class="upgrade-instruction">Upgrade your Bart and Nerf Gun to earn more points!</div>
+                
+                <!-- Bart Upgrades -->
+                <div class="upgrade-section">
+                    <h4 class="upgrade-section-title">Bart Upgrades</h4>
+                    <div class="current-bart-info">
+                        <img id="current-bart-display" src="/pngimg.com - simpsons_PNG93.png" alt="Current Bart" class="current-bart-display">
+                        <div class="bart-level-info">
+                            <div class="bart-level">Bart Level: <span id="current-bart-level">1</span>/250</div>
+                            <div class="bart-points">Points per click: <span id="current-bart-points">1</span></div>
+                            <div class="upgrade-cost">Next upgrade: <span id="upgrade-cost">30</span> points</div>
+                        </div>
+                    </div>
+                    <button id="upgrade-bart-btn" class="upgrade-bart-btn">Upgrade Bart!</button>
+                </div>
+                
+                <!-- Nerf Gun Upgrades -->
+                <div class="upgrade-section">
+                    <h4 class="upgrade-section-title">Nerf Gun Upgrades</h4>
+                    <div class="current-nerf-info">
+                        <img id="current-nerf-display" src="/InShot_20250108_192835610.jpg" alt="Current Nerf Gun" class="current-nerf-display">
+                        <div class="nerf-level-info">
+                            <div class="nerf-level">Nerf Level: <span id="current-nerf-level">1</span>/10</div>
+                            <div class="nerf-damage">Damage per shot: <span id="current-nerf-damage">5</span></div>
+                            <div class="nerf-upgrade-cost">Next upgrade: <span id="nerf-upgrade-cost">100</span> points</div>
+                        </div>
+                    </div>
+                    <button id="upgrade-nerf-btn" class="upgrade-nerf-btn">Upgrade Nerf Gun!</button>
+                </div>
+
+                <button id="save-all-btn" class="save-all-btn">Save All Progress</button>
+            </div>
+        </div>
+
+        <!-- Click Effects Container -->
+        <div id="click-effects" class="click-effects"></div>
+
+        <!-- Update Log Popup -->
+        <div id="update-log-popup" class="update-log-popup hidden">
+            <div class="update-log-content">
+                <div class="update-log-header">Update Log</div>
+                <div class="update-log-message">Audio Update</div>
+                <div class="update-log-buttons">
+                    <button id="play-log-btn" class="play-log-btn">Play Log</button>
+                    <button id="close-log-btn" class="close-log-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sam-js@0.3.1/dist/sam.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
